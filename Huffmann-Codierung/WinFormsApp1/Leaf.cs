@@ -12,11 +12,18 @@ namespace WinFormsApp1
         protected bool dummy = false;
 
         List<Node> children = new List<Node>();
-        int children_count_max = 2;
-        protected string Label = string.Empty;
+        protected int children_count_max = 2;
+        protected string _label = string.Empty;
         protected double _weight = 0;
-        public Node()
+        string _path = string.Empty;
+        public Node(int enc_alphabet_count)
         {
+            children_count_max = enc_alphabet_count;
+        }
+
+        protected Node()
+        {
+
         }
 
         public double weight
@@ -36,30 +43,53 @@ namespace WinFormsApp1
             }
         }
 
+        public string path
+        {
+            get { return _path; }
+            set { _path = value; }
+        }
+
         public bool children_limit_reached
         {
             get { return leaf ? false : children.Count >= children_count_max; }
         }
 
+        public Node addChildren
+        {
+            set { children.Add(value); }
+        }
+
+        public List<Node> getChildren
+        {
+            get { return children; }
+            set { children = value; }
+        }
+
+        public bool isLeaf { get { return leaf; } }
+        public bool isDummy { get { return dummy;} }
+
+        public string Label { get { return _label; } }
 
     }
 
     internal class Leaf : Node
     {
-        public Leaf(string Label, double possibility)
+        public Leaf(int enc_alphabet_count, string Label, double possibility)
         {
+            base.children_count_max = enc_alphabet_count;
             base.leaf = true;
-            base.Label = Label;
+            base._label = Label;
             base._weight = possibility;
         }
     }
 
     internal class DummyLeaf : Node
     {
-        public DummyLeaf()
+        public DummyLeaf(int enc_alphabet_count)
         {
+            base.children_count_max = enc_alphabet_count;
             base._weight = 0;
-            base.Label = "Dummy";
+            base._label = "Dummy";
             base.leaf = true;
             base.dummy = true;
         }

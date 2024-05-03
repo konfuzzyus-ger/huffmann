@@ -13,9 +13,21 @@ namespace WinFormsApp1
                 ["a", "0,1", ""],
                 ["b", "0,2", ""],
                 ["c", "0,5", ""],
-                ["d", "0.2", ""]
+                ["d", "0.1", ""],
+
+                ["e", "0.01", ""],
+                ["f", "0.01", ""],
+                ["g", "0.01", ""],
+                ["h", "0.01", ""],
+                ["i", "0.01", ""],
+                ["j", "0.01", ""],
+                ["k", "0.01", ""],
+                ["l", "0.01", ""],
+                ["m", "0.01", ""],
+                ["n", "0.01", ""],
                 ];
-            foreach (string[] datarow in data ) {
+            foreach (string[] datarow in data)
+            {
                 dataGridView1.Rows.Add(datarow);
             }
         }
@@ -34,6 +46,14 @@ namespace WinFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //Read Alphabet to encode to
+            List<string> enc_alpha = new List<string>();
+            for (int i = 0; i < listBox1.Items.Count; i++)
+            {
+                enc_alpha.Add(listBox1.Items[i].ToString());
+            }
+
+            //read symbols which will be encoded
             DataGridViewRowCollection Rows = dataGridView1.Rows;
             List<Node> Nodes = new List<Node>();
             foreach (DataGridViewRow row in Rows)
@@ -53,16 +73,21 @@ namespace WinFormsApp1
                 {
                     continue;
                 }
-                Leaf l = new Leaf(Label, posibility);
-                Nodes.Add(l); 
-            }
-            List<string> enc_alpha = new List<string>();
-            for (int i = 0; i < listBox1.Items.Count; i++)
-            {
-                enc_alpha.Add(listBox1.Items[i].ToString());
+                Leaf l = new Leaf(enc_alpha.Count, Label, posibility);
+                Nodes.Add(l);
             }
             huffmann h = new huffmann(enc_alpha, Nodes);
             h.algorithm();
+            Dictionary<string, string> encoding = h.getEncoding;
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                string letter = (string)dataGridView1.Rows[i].Cells[0].Value;
+                if (letter == null)
+                {
+                    continue;
+                }
+                dataGridView1.Rows[i].Cells[2].Value = encoding[letter];
+            }
             return;
         }
     }
