@@ -7,29 +7,12 @@ namespace WinFormsApp1
         public Form1()
         {
             InitializeComponent();
+
+            //Initialize with data for easy testing
             listBox1.Items.Add("0");
             listBox1.Items.Add("1");
-            //listBox1.Items.Add("2");
 
             textBox2.Text = "ACAACTTCGTCGCGCACATCCA";
-
-            /*string[][] data = [
-                ["a", "0,1", ""],
-                ["b", "0,2", ""],
-                ["c", "0,5", ""],
-                ["d", "0.1", ""],
-
-                ["e", "0.01", ""],
-                ["f", "0.01", ""],
-                ["g", "0.01", ""],
-                ["h", "0.01", ""],
-                ["i", "0.01", ""],
-                ["j", "0.01", ""],
-                ["k", "0.01", ""],
-                ["l", "0.01", ""],
-                ["m", "0.01", ""],
-                ["n", "0.01", ""],
-                ];*/
 
             string[][] data = [
                 ["AC", "0,09", ""],
@@ -45,18 +28,21 @@ namespace WinFormsApp1
             }
         }
 
+        //add symbol for encoding
         private void button2_Click(object sender, EventArgs e)
         {
             listBox1.Items.Add(textBox1.Text);
             textBox1.Clear();
         }
 
+        //remove symbol for encoding
         private void button3_Click(object sender, EventArgs e)
         {
             int selected = listBox1.SelectedIndex;
             listBox1.Items.RemoveAt(selected);
         }
 
+        //generate encoding-code
         private void button1_Click(object sender, EventArgs e)
         {
             //Read Alphabet to encode to
@@ -86,11 +72,15 @@ namespace WinFormsApp1
                 {
                     continue;
                 }
-                Leaf l = new Leaf(enc_alpha.Count, Label, posibility);
+                Leaf l = new Leaf(Label, posibility);
                 Nodes.Add(l);
             }
+
+            //Initialize huffmann-code-class and execute generation of code
             huffmann h = new huffmann(enc_alpha, Nodes);
             h.algorithm();
+
+            //show and save results
             Dictionary<string, string> encoding = h.getEncoding;
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
@@ -105,6 +95,7 @@ namespace WinFormsApp1
             Encode.Enabled = true;
         }
 
+        //encode given text with generated code
         private void button4_Click(object sender, EventArgs e)
         {
             string input = textBox2.Text;
@@ -120,10 +111,6 @@ namespace WinFormsApp1
                     }
                 }
             }
-            /*foreach(char x in input)
-            {
-                output += _encoding[x.ToString()];
-            }*/
             textBox3.Text = output;
         }
     }
