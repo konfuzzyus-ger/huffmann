@@ -39,14 +39,22 @@ namespace WinFormsApp1
         private void button3_Click(object sender, EventArgs e)
         {
             int selected = listBox1.SelectedIndex;
+            if (selected < 0 || selected > (listBox1.Items.Count -1))
+            {
+                return;
+            }
             listBox1.Items.RemoveAt(selected);
         }
 
         //generate encoding-code
         private void button1_Click(object sender, EventArgs e)
         {
+            //check if there is an alphabet to encode to, which has at least two elements
+            if(listBox1.Items.Count < 2) { return; }
+
             //Read Alphabet to encode to
             List<string> enc_alpha = new List<string>();
+
             for (int i = 0; i < listBox1.Items.Count; i++)
             {
                 enc_alpha.Add(listBox1.Items[i].ToString());
@@ -54,6 +62,7 @@ namespace WinFormsApp1
 
             //read symbols which will be encoded
             DataGridViewRowCollection Rows = dataGridView1.Rows;
+            if(Rows.Count < 2) { return; } //return if there are not a sufficient number of symbols to be encoded
             List<Node> Nodes = new List<Node>();
             foreach (DataGridViewRow row in Rows)
             {
