@@ -2,14 +2,18 @@ namespace WinFormsApp1
 {
     public partial class Form1 : Form
     {
+
+        Dictionary<string, string> _encoding = null;
         public Form1()
         {
             InitializeComponent();
             listBox1.Items.Add("0");
             listBox1.Items.Add("1");
-            listBox1.Items.Add("2");
+            //listBox1.Items.Add("2");
 
-            string[][] data = [
+            textBox2.Text = "ACAACTTCGTCGCGCACATCCA";
+
+            /*string[][] data = [
                 ["a", "0,1", ""],
                 ["b", "0,2", ""],
                 ["c", "0,5", ""],
@@ -25,7 +29,16 @@ namespace WinFormsApp1
                 ["l", "0.01", ""],
                 ["m", "0.01", ""],
                 ["n", "0.01", ""],
-                ];
+                ];*/
+
+            string[][] data = [
+                ["AC", "0,09", ""],
+                ["AA", "0,09", ""],
+                ["CT", "0,09", ""],
+                ["TC", "0,18", ""],
+                ["GT", "0,09", ""],
+                ["CG", "0.18", ""],
+                ["CA", "0.28", ""]];
             foreach (string[] datarow in data)
             {
                 dataGridView1.Rows.Add(datarow);
@@ -88,7 +101,30 @@ namespace WinFormsApp1
                 }
                 dataGridView1.Rows[i].Cells[2].Value = encoding[letter];
             }
-            return;
+            _encoding = encoding;
+            Encode.Enabled = true;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            string input = textBox2.Text;
+            string output = string.Empty;
+            while(input.Length > 0)
+            {
+                foreach (string x in _encoding.Keys)
+                {
+                    if (input.StartsWith(x)) {
+                        output += _encoding[x];
+                        input = input.Substring(x.Length);
+                        break;
+                    }
+                }
+            }
+            /*foreach(char x in input)
+            {
+                output += _encoding[x.ToString()];
+            }*/
+            textBox3.Text = output;
         }
     }
 }
