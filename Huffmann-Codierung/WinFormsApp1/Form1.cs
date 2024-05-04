@@ -68,18 +68,26 @@ namespace WinFormsApp1
             {
                 string Label = (string)row.Cells[0].Value;
                 string dbl = (string)row.Cells[1].Value;
+                if (dbl == null && Label == null)
+                {
+                    continue;
+                }
                 if (dbl == null)
                 {
-                    continue;
+                    DialogResult er = MessageBox.Show("A value of possibility isn't given.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
                 dbl = dbl.Replace(".", ",");
-                if (!double.TryParse(dbl, out double posibility))
+                double posibility = 0.0;
+                if (!double.TryParse(dbl, out posibility))
                 {
-                    continue;
+                    DialogResult er = MessageBox.Show("A value of possibility isn't able to be parsed to a double.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
-                if (posibility > 1)
+                if (posibility <= 0)
                 {
-                    continue;
+                    DialogResult er = MessageBox.Show("A value of possibility isn't above zero.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
                 Leaf l = new Leaf(Label, posibility);
                 Nodes.Add(l);

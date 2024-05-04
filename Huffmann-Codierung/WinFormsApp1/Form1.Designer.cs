@@ -63,7 +63,7 @@
             dataGridView1.Location = new Point(12, 58);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.Size = new Size(356, 607);
+            dataGridView1.Size = new Size(688, 523);
             dataGridView1.TabIndex = 1;
             // 
             // Symbol
@@ -127,10 +127,10 @@
             // Encode
             // 
             Encode.Enabled = false;
-            Encode.Location = new Point(373, 85);
-            Encode.Margin = new Padding(2, 2, 2, 2);
+            Encode.Location = new Point(12, 613);
+            Encode.Margin = new Padding(2);
             Encode.Name = "Encode";
-            Encode.Size = new Size(330, 20);
+            Encode.Size = new Size(688, 20);
             Encode.TabIndex = 6;
             Encode.Text = "Encode";
             Encode.UseVisualStyleBackColor = true;
@@ -138,19 +138,19 @@
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(373, 58);
-            textBox2.Margin = new Padding(2, 2, 2, 2);
+            textBox2.Location = new Point(12, 586);
+            textBox2.Margin = new Padding(2);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(330, 23);
+            textBox2.Size = new Size(688, 23);
             textBox2.TabIndex = 7;
             // 
             // textBox3
             // 
-            textBox3.Location = new Point(373, 109);
-            textBox3.Margin = new Padding(2, 2, 2, 2);
+            textBox3.Location = new Point(12, 643);
+            textBox3.Margin = new Padding(2);
             textBox3.Name = "textBox3";
             textBox3.ReadOnly = true;
-            textBox3.Size = new Size(330, 23);
+            textBox3.Size = new Size(688, 23);
             textBox3.TabIndex = 8;
             // 
             // Form1
