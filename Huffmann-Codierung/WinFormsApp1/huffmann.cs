@@ -119,5 +119,13 @@ namespace WinFormsApp1
                 return result;
             }
         }
+
+        public Node getGraph
+        {
+            get
+            {
+                return encoding;
+            }
+        }
     }
 }
